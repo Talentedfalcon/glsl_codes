@@ -9,9 +9,9 @@ uniform vec2 u_resolution;
 uniform vec2 u_mouse;
 uniform float u_time;
 
-float polygon_distance_field(vec2 st,vec2 pos,int N){
+float polygon_distance_field(vec2 st,vec2 pos,float rotate,int N){
     st-=pos;
-    float a = atan(st.x,st.y)+PI;
+    float a = atan(st.x,st.y)+(PI*rotate);
     float r = TWO_PI/float(N);
 
     float d=cos(floor(0.5+a/r)*r-a)*length(st)*2.;
@@ -25,9 +25,9 @@ void main(){
 
     int N=5;
     vec2 pos=vec2(0.5,0.5);
-    d=polygon_distance_field(st,pos,N);
-    // d=min(polygon_distance_field(st,pos,N),polygon_distance_field(st,pos,N+3));     //Union the 2 fields
-    // d=max(polygon_distance_field(st,pos,N),polygon_distance_field(st,pos,N+3));     //Intersect the 2 fields
+    d=polygon_distance_field(st,pos,1.,N);
+    // d=min(polygon_distance_field(st,pos,1.,N),polygon_distance_field(st,pos,1.,N+3));     //Union the 2 fields
+    // d=max(polygon_distance_field(st,pos,1.,N),polygon_distance_field(st,pos,1.,N+3));     //Intersect the 2 fields
 
     // color=vec3(d);
     // color=vec3(fract(d*10.));
