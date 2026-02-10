@@ -1,2 +1,2 @@
-- Exercises from [Book of Shaders](https://thebookofshaders.com){:target="_blank"}
-- .frag files are run using [glslViewer](https://github.com/patriciogonzalezvivo/glslViewer){:target="_blank"}
+- Exercises from <a href="https://thebookofshaders.com" target="_blank">Book of Shaders</a>
+- .frag files are run using <a href="https://github.com/patriciogonzalezvivo/glslViewer" target="_blank">glslViewer</a>
