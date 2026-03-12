@@ -65,10 +65,10 @@ void main(){
     color=vec3(solid_rect(rotate2D(fpos,PI/4.),vec2(0.5,0.5),2.,0.15));
 
     //Curved Lines
-    color=vec3(
-        (circle(fpos,vec2(0.),1.1)-circle(fpos,vec2(0.),0.9))
-        +(circle(fpos,vec2(1.),1.1)-circle(fpos,vec2(1.),0.9))
-    );
+    // color=vec3(
+    //     (circle(fpos,vec2(0.),1.1)-circle(fpos,vec2(0.),0.9))
+    //     +(circle(fpos,vec2(1.),1.1)-circle(fpos,vec2(1.),0.9))
+    // );
 
     gl_FragColor=vec4(color,1.);
 }
