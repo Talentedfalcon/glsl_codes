@@ -2,6 +2,9 @@
 precision mediump float;
 #endif
 
+#define PI 3.14159265359
+#define TWO_PI 6.28318530718
+
 uniform vec2 u_resolution;
 uniform vec2 u_mouse;
 uniform float u_time;
@@ -39,6 +42,19 @@ float modulate_circle(vec2 st,vec2 pos,float diameter){
     return pct;
 }
 
+float modulate_polygon(vec2 st,vec2 pos,float size,int N){
+    st-=pos;
+    float r = TWO_PI/float(N);
+    float a = atan(st.x,st.y)+PI;
+    float m=abs(mod(a+u_time*2.,3.14*2.)-3.14)/3.6;
+    float d=cos(floor(0.5+a/r)*r-a)*length(st)*2.;
+
+    size+=sin(a*50.)*noise(st+u_time*0.2)*0.1;
+    size+=(sin(a*20.)*.1*pow(m,2.));
+    float pct=1.-smoothstep(size,size+0.001,d);
+    return pct;   
+}
+
 void main(){
     vec2 st=gl_FragCoord.xy/u_resolution.xy;
     st.x*=u_resolution.x/u_resolution.y;
@@ -50,6 +66,13 @@ void main(){
     color=vec3(
         modulate_circle(st,vec2(0.5,0.5),diameter)
         -modulate_circle(st,vec2(0.5,0.5),diameter-width)
+    );
+
+    float size=0.5;
+    int N=4;
+    color=vec3(
+        modulate_polygon(st,vec2(0.5,0.5),size,N)
+        -modulate_polygon(st,vec2(0.5,0.5),size-width,N)
     );
 
     gl_FragColor=vec4(1.-color,1.);
